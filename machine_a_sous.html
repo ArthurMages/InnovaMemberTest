@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine à sous truquée</title>
+  <link rel="stylesheet" href="style_mas.css">
+</head>
+<body>
+  <h1>🎰 Machine à Sous Truquée</h1>
+
+  <div id="slot-machine">
+    <div class="reel" id="reel1">🍒</div>
+    <div class="reel" id="reel2">🍋</div>
+    <div class="reel" id="reel3">🍉</div>
+  </div>
+
+  <button id="spin">Lancer</button>
+  <div id="message"></div>
+
+  <div id="cheat-zone"></div>
+
+  <script>
+    let cheatMode = false;
+    const symbols = ['🍒', '🍋', '🍉', '⭐', '🔔'];
+
+    const reels = [
+      document.getElementById('reel1'),
+      document.getElementById('reel2'),
+      document.getElementById('reel3')
+    ];
+
+    document.getElementById('cheat-zone').addEventListener('click', () => {
+      cheatMode = true;
+      console.log('Mode triche activé !');
+    });
+
+    document.getElementById('spin').addEventListener('click', () => {
+      const message = document.getElementById('message');
+      message.textContent = '';
+
+      reels.forEach((reel, index) => {
+        reel.classList.add('spinning');
+        setTimeout(() => {
+          let symbol = cheatMode ? symbols[0] : symbols[Math.floor(Math.random() * symbols.length)];
+          reel.textContent = symbol;
+          reel.classList.remove('spinning');
+
+          if (index === 2) {
+            const [s1, s2, s3] = reels.map(r => r.textContent);
+            if (s1 === s2 && s2 === s3) {
+              message.textContent = cheatMode ? '💰 JACKPOT ! Grâce à la triche 😏' : '🎉 JACKPOT honnête ! Bien joué.';
+            }
+            cheatMode = false;
+          }
+        }, 500 + index * 300);
+      });
+    });
+  </script>
+</body>
+</html>

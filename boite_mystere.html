@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jeu de la Boîte Mystère</title>
+  <link rel="stylesheet" href="style_boite_mystere.css">
+</head>
+<body>
+  <h1>🎁 Boîte Mystère</h1>
+  <div id="mystery-box">🎁</div>
+  <div id="click-count">Clics : 0</div>
+  <div id="open-result"></div>
+
+  <script>
+    const box = document.getElementById("mystery-box");
+    const counter = document.getElementById("click-count");
+    const result = document.getElementById("open-result");
+
+    let clickCount = 0;
+    let isOpened = false;
+
+    function spawnConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.top = Math.random() * -50 + "px";
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 1500);
+      }
+    }
+
+    function openBox() {
+      if (isOpened) return;
+      isOpened = true;
+      box.classList.add("open");
+      box.textContent = "💰";
+
+      if (clickCount >= 3) {
+        result.textContent = "🎉 Bravo ! Vous avez gagné !";
+        result.style.color = "lightgreen";
+        spawnConfetti();
+      } else {
+        result.textContent = "💥 Perdu ! Il fallait cliquer plus...";
+        result.style.color = "tomato";
+      }
+    }
+
+    box.addEventListener("click", () => {
+      if (isOpened) return;
+      clickCount++;
+      counter.textContent = `Clics : ${clickCount}`;
+      if (clickCount >= 5) openBox();
+    });
+
+    box.addEventListener("contextmenu", e => {
+      e.preventDefault();
+      openBox();
+    });
+  </script>
+</body>
+</html>
