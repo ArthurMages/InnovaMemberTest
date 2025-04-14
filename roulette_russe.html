@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette Russe Électronique</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/roulette_russe.css">
+</head>
+<body>
+    <h1>🔫 Roulette Russe Virtuelle</h1>
+    
+    <div id="game-container">
+        <div id="gun">
+            <div id="chamber" class="spin-animation">🎲</div>
+            <div id="trigger">🎯</div>
+        </div>
+        
+        <div id="stats">
+            <div id="bullet-counter">Balles restantes: <span id="bullets">1</span></div>
+            <div id="result" role="alert"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/roulette_russe.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+:root {
+    --primary-color: gold;
+    --background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    --text-shadow: 0 0 15px #ffc107;
+    --danger-red: #ff3860;
+    --safe-green: #48c774;
+    --box-size: clamp(180px, 30vmin, 220px);
+    --reel-size: clamp(80px, 15vmin, 120px);
+    --glow-intensity: 2px;
+    --game-container-padding: clamp(10px, 3vmin, 30px);
+  }
+  
+  body {
+    background: var(--background);
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 2rem 0;
+    color: var(--primary-color);
+    text-shadow: var(--text-shadow);
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+  
+  .game-container {
+    background: radial-gradient(circle at 50% 0%, #2a2a2a 0%, #1a1a1a 100%);
+    padding: var(--game-container-padding);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    margin: 20px;
+    position: relative;
+    will-change: transform;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+  
+  @keyframes confetti-fall {
+    0% { transform: translateY(-20vh) rotate(0deg) scale(0.8); opacity: 1; }
+    100% { transform: translateY(120vh) rotate(720deg) scale(1.2); opacity: 0; }
+  }
+  
+  .shake { animation: shake 0.5s; }
+  .hue-rotate { filter: hue-rotate(90deg); transition: filter 0.3s; }
+  
+  button {
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s;
+  }
+  
+  button:hover { 
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    #slot-machine { flex-direction: column; }
+    .game-container { margin: 10px; }
+  }
